@@ -28,7 +28,7 @@
   ansible.builtin.lineinfile:
     path: /etc/nut/upsmon.conf
     regexp: "^MONITOR {{ nut_client_ups }}.*"
-    line: "MONITOR {{ nut_client_ups }}@{{ nut_client_server }} {{ nut_client_user }} {{ nut_client_password }} secondary"
+    line: "MONITOR {{ nut_client_ups }}@{{ nut_client_server }} {{ nut_client_ups_num }} {{ nut_client_user }} {{ nut_client_password }} {{ nut_client_type }}"
   notify: Restart nut monitor
   become: true
   become_user: root

@@ -2,6 +2,8 @@
 # defaults file for nut_client
 nut_client_server: localhost
 nut_client_ups: qnapups
+nut_client_ups_num: 1
 nut_client_user: nutclient
 nut_client_password:
 nut_client_force_ssl: 0
+nut_client_type: secondary

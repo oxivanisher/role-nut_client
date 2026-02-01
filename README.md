@@ -18,9 +18,11 @@ Role Variables
 | -------------------- | ---------------------------------------------- | ------------- |
 | nut_client_server    | IP or hostname of the nut server               | `localhost`   |
 | nut_client_ups       | The name of the USV (configured in nut server) | `qnapups`     |
+| nut_client_ups_num   | Number of UPS devices                          | `1`           |
 | nut_client_user      | Nut server user                                | `nutclient`   |
 | nut_client_password  | Nut server password                            | ``            |
-| nut_client_force_ssl | Force SSL 1/0                                  | `0`           |
+| nut_client_force_ssl | Force SSL (1/0)                                | `0`           |
+| nut_client_type      | Nut client type (primary/secondary)            | `secondary`   |
 
 Dependencies
 ------------
