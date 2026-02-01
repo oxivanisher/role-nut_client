@@ -20,6 +20,7 @@
     path: /etc/nut/nut.conf
     regexp: "^MODE=.*"
     line: 'MODE=netclient'
+  ignore_errors: "{{ ansible_check_mode }}"
   notify: Restart nut monitor
   become: true
   become_user: root
@@ -29,6 +30,7 @@
     path: /etc/nut/upsmon.conf
     regexp: "^MONITOR {{ nut_client_ups }}.*"
     line: "MONITOR {{ nut_client_ups }}@{{ nut_client_server }} {{ nut_client_ups_num }} {{ nut_client_user }} {{ nut_client_password }} {{ nut_client_type }}"
+  ignore_errors: "{{ ansible_check_mode }}"
   notify: Restart nut monitor
   become: true
   become_user: root
@@ -38,6 +40,7 @@
     path: /etc/nut/upsmon.conf
     regexp: "^FORCESSL.*"
     line: "FORCESSL {{ nut_client_force_ssl }}"
+  ignore_errors: "{{ ansible_check_mode }}"
   notify: Restart nut monitor
   become: true
   become_user: root
@@ -46,6 +49,7 @@
   ansible.builtin.service:
     name: nut-monitor.service
     enabled: true
+  ignore_errors: "{{ ansible_check_mode }}"
   notify: Restart nut monitor
   become: true
   become_user: root
