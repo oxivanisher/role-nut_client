@@ -46,6 +46,6 @@
   ansible.builtin.service:
     name: nut-monitor.service
     enabled: true
-    notify: Restart nut monitor
+  notify: Restart nut monitor
   become: true
   become_user: root
