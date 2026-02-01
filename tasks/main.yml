@@ -1,0 +1,51 @@
+---
+# tasks file for nut_client
+
+# nut_client_server: localhost
+# nut_client_ups: qnapups
+# nut_client_user: nutclient
+# nut_client_password:
+# nut_client_force_ssl: 0
+
+
+- name: Install nut-client package
+  ansible.builtin.package:
+    name: nut-client
+    state: present
+  become: true
+  become_user: root
+
+- name: Configure netclient mode
+  ansible.builtin.lineinfile:
+    path: /etc/nut/nut.conf
+    regexp: "^MODE=.*"
+    line: 'MODE=netclient'
+  notify: Restart nut monitor
+  become: true
+  become_user: root
+
+- name: Configure nut server
+  ansible.builtin.lineinfile:
+    path: /etc/nut/upsmon.conf
+    regexp: "^MONITOR {{ nut_client_ups }}.*"
+    line: "MONITOR {{ nut_client_ups }}@{{ nut_client_server }} {{ nut_client_user }} {{ nut_client_password }} secondary"
+  notify: Restart nut monitor
+  become: true
+  become_user: root
+
+- name: Configure nut server ssl
+  ansible.builtin.lineinfile:
+    path: /etc/nut/upsmon.conf
+    regexp: "^FORCESSL.*"
+    line: "FORCESSL {{ nut_client_force_ssl }}"
+  notify: Restart nut monitor
+  become: true
+  become_user: root
+
+- name: Enable nut monitor service
+  ansible.builtin.service:
+    name: nut-monitor.service
+    enabled: true
+    notify: Restart nut monitor
+  become: true
+  become_user: root
